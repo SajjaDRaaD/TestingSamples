@@ -1,4 +1,5 @@
 ﻿using CodeSamples;
+using FluentAssertions;
 using Xunit.Sdk;
 
 namespace TestSamples
@@ -31,7 +32,7 @@ namespace TestSamples
                            "</Customer>";
 
             var result = NinjaXmlSerializer.Serialize(customer);
-            Assert.Equal(expected, result);
+            result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
@@ -55,13 +56,15 @@ namespace TestSamples
                            "</Customer>" +
                            "</Order>";
             var result = NinjaXmlSerializer.Serialize(order);
-            Assert.Equal(expected, result);
+            result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void does_not_serialize_null_inputs()
         {
-            Assert.Throws<ArgumentNullException>(() => NinjaXmlSerializer.Serialize(null));
+            Action serialization = () => NinjaXmlSerializer.Serialize(null);
+
+            serialization.Should().Throw<ArgumentNullException>();
         }
         
     }
