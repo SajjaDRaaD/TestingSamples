@@ -17,7 +17,7 @@ namespace TestSamples
         }
 
         [Fact]
-        public void serialize_flat_object()
+        public void serializes_flat_object()
         {
             Customer customer = new Customer
             {
@@ -35,7 +35,7 @@ namespace TestSamples
         }
 
         [Fact]
-        public void serialize_nested_object()
+        public void serializes_nested_object()
         {
             Order order = new Order
             {
@@ -59,7 +59,7 @@ namespace TestSamples
         }
 
         [Fact]
-        public void throw_null_exception_when_input_is_null()
+        public void does_not_serialize_null_inputs()
         {
             Assert.Throws<ArgumentNullException>(() => NinjaXmlSerializer.Serialize(null));
         }
